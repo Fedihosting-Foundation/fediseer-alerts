@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Black">
+    <option name="enabledOnReformat" value="true" />
+    <option name="enabledOnSave" value="true" />
+    <option name="sdkUUID" value="132212c5-7cdc-4125-a87b-48895f62eb7d" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Poetry (fediseer-alerts)" project-jdk-type="Python SDK" />
+</project>
