@@ -36,5 +36,5 @@ RUN useradd --create-home appuser
 RUN chown appuser:appuser -R /app/
 USER appuser
 # Run the executable
-ENV PYTHONPATH "${PYTHONPATH}:/abusemailchecker"
-CMD [ "python3", "abusemailchecker" ]
+ENV PYTHONPATH "${PYTHONPATH}:/fediseernotification"
+CMD [ "python3", "fediseernotification" ]
