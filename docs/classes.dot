@@ -1,0 +1,11 @@
+digraph "classes" {
+rankdir=BT
+charset="utf-8"
+"fediseer_alerts.models.ActivityReport" [color="black", fontcolor="black", label=<{ActivityReport|created : str<br ALIGN="LEFT"/>created : str<br ALIGN="LEFT"/>report_activity<br ALIGN="LEFT"/>report_activity<br ALIGN="LEFT"/>report_type<br ALIGN="LEFT"/>report_type<br ALIGN="LEFT"/>source_domain : str<br ALIGN="LEFT"/>source_domain : str<br ALIGN="LEFT"/>target_domain : str<br ALIGN="LEFT"/>target_domain : str<br ALIGN="LEFT"/>|}>, shape="record", style="solid"];
+"fediseer_alerts.models.Report_Activity" [color="black", fontcolor="black", label=<{Report_Activity|name<br ALIGN="LEFT"/>|}>, shape="record", style="solid"];
+"fediseer_alerts.models.Report_Type" [color="black", fontcolor="black", label=<{Report_Type|name<br ALIGN="LEFT"/>|}>, shape="record", style="solid"];
+"fediseer_alerts.models.Report_Activity" -> "fediseer_alerts.models.ActivityReport" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="report_activity", style="solid"];
+"fediseer_alerts.models.Report_Type" -> "fediseer_alerts.models.ActivityReport" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="report_type", style="solid"];
+"fediseer_alerts.models.Report_Activity" -> "fediseer_alerts.models.ActivityReport" [arrowhead="odiamond", arrowtail="none", fontcolor="green", label="report_activity", style="solid"];
+"fediseer_alerts.models.Report_Type" -> "fediseer_alerts.models.ActivityReport" [arrowhead="odiamond", arrowtail="none", fontcolor="green", label="report_type", style="solid"];
+}

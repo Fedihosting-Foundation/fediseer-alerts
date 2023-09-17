@@ -1,0 +1,90 @@
+version: '3'
+vars:
+    BUILD_DIR: fediseer_alerts
+    IMAGE_NAME: fediseer_alerts
+    DOCKER_FILE: Dockerfile
+tasks:
+    default:
+        silent: true
+        interactive: false
+        deps:
+            -   task: format
+            -   task: security
+
+    publish:
+        -   task: security
+        -   task: build
+        - poetry publish
+    build:
+        env:
+            PIPENV_IGNORE_VIRTUALENVS: 1
+        deps: [ docs, clean ]
+        cmds:
+            - poetry version $(git describe --tags --abbrev=0)
+            - git-changelog -p -a -x >> CHANGELOG.md
+            - git add CHANGELOG.md
+            - poetry build
+    install:
+        - pip install . --upgrade
+    setup:
+        - sudo apt-get install git-extras -y
+        - python3 -m pip install pipx
+        - python3 -m pipx ensurepath
+        - pipx install poetry
+        - poetry install
+    test:
+        silent: false
+        interactive: false
+        cmds:
+            - poetry run vulture --min-confidence 100 {{.BUILD_DIR}}
+            #- poetry run xenon --max-absolute C --max-modules B --max-average B {{.BUILD_DIR}}
+            #            - poetry run mypy --install-types --non-interactive
+            #            - poetry run mypy {{.BUILD_DIR}} # Little too aggressive
+            #- poetry run pytest --cov --cov-fail-under=80
+    clean:
+        - rm -rf dist
+        - rm -rf .mypy_cache
+        - poetry cache clear _default_cache --all  --no-interaction
+        - poetry cache clear PyPI --all  --no-interaction
+        - poetry check
+        - py3clean .
+    format:
+        silent: false
+        interactive: false
+        cmds:
+            - poetry run isort --atomic .
+            - poetry run black .
+            - poetry run autoflake {{.BUILD_DIR}}
+            - poetry run flake8 {{.BUILD_DIR}}
+    docs:
+        silent: false
+        interactive: false
+        cmds:
+            - rm -f CHANGELOG.md
+            - git-changelog -a -x >> CHANGELOG.md
+            # - poetry run mdformat CHANGELOG.md
+            - git add CHANGELOG.md
+            - rm -rf docs
+            - poetry run pdoc3 {{.BUILD_DIR}} -o docs -f
+            - poetry run pyreverse {{.BUILD_DIR}} -d docs
+            - poetry run mdformat docs
+            - poetry run mdToRst README.md >> ./docs/index.rst
+            - git add docs
+    security:
+        - poetry run whispers {{.BUILD_DIR}} # Check for security issues
+        - poetry run bandit --silent -r {{.BUILD_DIR}}
+        - poetry run tartufo scan-local-repo .
+    docker:
+        - task: clean
+        - docker buildx build . --no-cache --pull --progress=plain -t {{.IMAGE_NAME}}:latest -f {{.DOCKER_FILE}}
+        - docker run --env-file .env --rm --name {{.IMAGE_NAME}} {{.IMAGE_NAME}}:latest
+    show_secrets:
+        - git secret reveal -f
+    save_secrets:
+        - git secret hide -m -d
+
+    show_secrets_cicd:
+        - sudo apt install git-secret -y
+        - echo "$GPG_PRIVATE_KEY" > ./private_key.gpg
+        - gpg --batch --yes --pinentry-mode loopback --import private_key.gpg
+        - git secret reveal -p "$GPG_PASSPHRASE"

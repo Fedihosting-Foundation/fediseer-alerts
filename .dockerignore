@@ -1,0 +1,8 @@
+
+docs
+CHANGELOG.md
+docker-compose.yml
+Dockerfile
+README.md
+Taskfile.yaml
+.*
