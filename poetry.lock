@@ -734,6 +734,26 @@ files = [
 ]
 
 [[package]]
+name = "linkify-it-py"
+version = "2.0.2"
+description = "Links recognition library with FULL unicode support."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "linkify-it-py-2.0.2.tar.gz", hash = "sha256:19f3060727842c254c808e99d465c80c49d2c7306788140987a1a7a29b0d6ad2"},
+    {file = "linkify_it_py-2.0.2-py3-none-any.whl", hash = "sha256:a3a24428f6c96f27370d7fe61d2ac0be09017be5190d68d8658233171f1b6541"},
+]
+
+[package.dependencies]
+uc-micro-py = "*"
+
+[package.extras]
+benchmark = ["pytest", "pytest-benchmark"]
+dev = ["black", "flake8", "isort", "pre-commit", "pyproject-flake8"]
+doc = ["myst-parser", "sphinx", "sphinx-book-theme"]
+test = ["coverage", "pytest", "pytest-cov"]
+
+[[package]]
 name = "luhn"
 version = "0.2.0"
 description = "Generate and verify Luhn check digits"
@@ -903,16 +923,17 @@ testing = ["coverage", "pyyaml"]
 
 [[package]]
 name = "markdown-it-py"
-version = "3.0.0"
+version = "2.2.0"
 description = "Python port of markdown-it. Markdown parsing, done right!"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.7"
 files = [
-    {file = "markdown-it-py-3.0.0.tar.gz", hash = "sha256:e3f60a94fa066dc52ec76661e37c851cb232d92f9886b15cb560aaada2df8feb"},
-    {file = "markdown_it_py-3.0.0-py3-none-any.whl", hash = "sha256:355216845c60bd96232cd8d8c40e8f9765cc86f46880e43a8fd22dc1a1a8cab1"},
+    {file = "markdown-it-py-2.2.0.tar.gz", hash = "sha256:7c9a5e412688bc771c67432cbfebcdd686c93ce6484913dccf06cb5a0bea35a1"},
+    {file = "markdown_it_py-2.2.0-py3-none-any.whl", hash = "sha256:5a35f8d1870171d9acc47b99612dc146129b631baf04970128b568f190d0cc30"},
 ]
 
 [package.dependencies]
+linkify-it-py = {version = ">=1,<3", optional = true, markers = "extra == \"linkify\""}
 mdurl = ">=0.1,<1.0"
 
 [package.extras]
@@ -922,7 +943,7 @@ compare = ["commonmark (>=0.9,<1.0)", "markdown (>=3.4,<4.0)", "mistletoe (>=1.0
 linkify = ["linkify-it-py (>=1,<3)"]
 plugins = ["mdit-py-plugins"]
 profiling = ["gprof2dot"]
-rtd = ["jupyter_sphinx", "mdit-py-plugins", "myst-parser", "pyyaml", "sphinx", "sphinx-copybutton", "sphinx-design", "sphinx_book_theme"]
+rtd = ["attrs", "myst-parser", "pyyaml", "sphinx", "sphinx-copybutton", "sphinx-design", "sphinx_book_theme"]
 testing = ["coverage", "pytest", "pytest-cov", "pytest-regressions"]
 
 [[package]]
@@ -1042,20 +1063,20 @@ test = ["coverage", "pytest (>=6.0,<7.0)", "pytest-cov"]
 
 [[package]]
 name = "mdformat-gfm"
-version = "0.3.0"
+version = "0.3.5"
 description = "Mdformat plugin for GitHub Flavored Markdown compatibility"
 optional = false
-python-versions = ">=3.6.1,<4.0.0"
+python-versions = ">=3.7,<4.0"
 files = [
-    {file = "mdformat-gfm-0.3.0.tar.gz", hash = "sha256:bceb7b320607fdf245b439c23097ce55574a0bfe1199a9e1a1cc868dcfecdd6b"},
-    {file = "mdformat_gfm-0.3.0-py3-none-any.whl", hash = "sha256:29cb6c37655245285ac4ddc00f3225a5ba4b6c550223d81c0b4f14269c4956fd"},
+    {file = "mdformat-gfm-0.3.5.tar.gz", hash = "sha256:5ee5f0de1d3b56d5edfced023bfff0aeed958be328e5460dac3221ac1b61ce7c"},
+    {file = "mdformat_gfm-0.3.5-py3-none-any.whl", hash = "sha256:1e627edc7665b59e008b3b9e5decc18c40cbd625c196d77e5ea3bc624e80ac8a"},
 ]
 
 [package.dependencies]
-markdown-it-py = ">=0.5.8"
-mdformat = ">=0.7.0,<0.8.0"
+markdown-it-py = {version = "*", extras = ["linkify"]}
+mdformat = ">=0.7.5,<0.8.0"
 mdformat-tables = ">=0.4.0"
-mdit-py-plugins = ">=0.2.0"
+mdit-py-plugins = ">=0.2.0,<0.4.0"
 
 [[package]]
 name = "mdformat-tables"
@@ -1076,21 +1097,21 @@ test = ["coverage", "pytest (>=6.0,<7.0)", "pytest-cov"]
 
 [[package]]
 name = "mdit-py-plugins"
-version = "0.4.0"
+version = "0.3.5"
 description = "Collection of plugins for markdown-it-py"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.7"
 files = [
-    {file = "mdit_py_plugins-0.4.0-py3-none-any.whl", hash = "sha256:b51b3bb70691f57f974e257e367107857a93b36f322a9e6d44ca5bf28ec2def9"},
-    {file = "mdit_py_plugins-0.4.0.tar.gz", hash = "sha256:d8ab27e9aed6c38aa716819fedfde15ca275715955f8a185a8e1cf90fb1d2c1b"},
+    {file = "mdit-py-plugins-0.3.5.tar.gz", hash = "sha256:eee0adc7195e5827e17e02d2a258a2ba159944a0748f59c5099a4a27f78fcf6a"},
+    {file = "mdit_py_plugins-0.3.5-py3-none-any.whl", hash = "sha256:ca9a0714ea59a24b2b044a1831f48d817dd0c817e84339f20e7889f392d77c4e"},
 ]
 
 [package.dependencies]
-markdown-it-py = ">=1.0.0,<4.0.0"
+markdown-it-py = ">=1.0.0,<3.0.0"
 
 [package.extras]
 code-style = ["pre-commit"]
-rtd = ["myst-parser", "sphinx-book-theme"]
+rtd = ["attrs", "myst-parser (>=0.16.1,<0.17.0)", "sphinx-book-theme (>=0.1.0,<0.2.0)"]
 testing = ["coverage", "pytest", "pytest-cov", "pytest-regressions"]
 
 [[package]]
@@ -1847,6 +1868,20 @@ files = [
     {file = "typing_extensions-4.7.1-py3-none-any.whl", hash = "sha256:440d5dd3af93b060174bf433bccd69b0babc3b15b1a8dca43789fd7f61514b36"},
     {file = "typing_extensions-4.7.1.tar.gz", hash = "sha256:b75ddc264f0ba5615db7ba217daeb99701ad295353c45f9e95963337ceeeffb2"},
 ]
+
+[[package]]
+name = "uc-micro-py"
+version = "1.0.2"
+description = "Micro subset of unicode data files for linkify-it-py projects."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "uc-micro-py-1.0.2.tar.gz", hash = "sha256:30ae2ac9c49f39ac6dce743bd187fcd2b574b16ca095fa74cd9396795c954c54"},
+    {file = "uc_micro_py-1.0.2-py3-none-any.whl", hash = "sha256:8c9110c309db9d9e87302e2f4ad2c3152770930d88ab385cd544e7a7e75f3de0"},
+]
+
+[package.extras]
+test = ["coverage", "pytest", "pytest-cov"]
 
 [[package]]
 name = "urllib3"
