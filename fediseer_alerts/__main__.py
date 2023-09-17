@@ -1,31 +1,36 @@
+import logging
+import os
 from os import getenv
+
+if os.getenv("LOG_LEVEL") is None:
+    logging.basicConfig(level=logging.INFO)
+else:
+    logging.basicConfig(level=int(os.getenv("LOG_LEVEL")))
+
 from time import sleep
 
 from dotenv import load_dotenv
 from pymongo import MongoClient
-
-from fediseer_alerts.models import ActivityReport, Report_Type, Report_Activity
-
-load_dotenv()
-
 from requests import get
-
 from slack_sdk.webhook import WebhookClient
 
-webhook = False
-
-if getenv('SLACK_WEBHOOK_URL'):
-    webhook = WebhookClient(getenv('SLACK_WEBHOOK_URL'))
-
-db = MongoClient(getenv('MONGO_URI'))['fediseer-notifications']['censures']
+from fediseer_alerts.models import ActivityReport, Report_Activity, Report_Type
 
 
 def start():
-    print("Starting...")
+    load_dotenv()
+
+    webhook = False
+
+    if getenv('SLACK_WEBHOOK_URL'):
+        webhook = WebhookClient(getenv('SLACK_WEBHOOK_URL'), timeout=60)
+
+    db = MongoClient(getenv('MONGO_URI'))['fediseer-notifications']['censures']
+    logging.info("Starting...")
     while True:
         censures = get_censures()
         if len(censures) > 0:
-            print("Censures found")
+            logging.info("Censures found")
             for c in censures:
                 censure = ActivityReport(
                     source_domain=c['source_domain'],
@@ -55,7 +60,7 @@ def start():
                             "report_activity": censure.report_activity.value,
                         }
                     )
-                    print(f"New censure found: {str(censure)}")
+                    logging.info(f"New censure found: {str(censure)}")
                     if webhook:
                         webhook.send(
                             text=f"From: {censure.source_domain}\n"
@@ -64,8 +69,8 @@ def start():
                         )
 
         else:
-            print("No censures found")
-        print("Waiting 60 seconds...")
+            logging.info("No censures found")
+        logging.info("Waiting 60 seconds...")
         sleep(60)
 
 
@@ -75,3 +80,8 @@ def get_censures():
         return response.json()
     else:
         return []
+
+
+if __name__ == "__main__":
+    logging.info("START")
+    start()

@@ -1,0 +1,8 @@
+digraph "packages" {
+rankdir=BT
+charset="utf-8"
+"fediseer_alerts" [color="black", label=<fediseer_alerts>, shape="box", style="solid"];
+"fediseer_alerts.__main__" [color="black", label=<fediseer_alerts.__main__>, shape="box", style="solid"];
+"fediseer_alerts.models" [color="black", label=<fediseer_alerts.models>, shape="box", style="solid"];
+"fediseer_alerts.__main__" -> "fediseer_alerts.models" [arrowhead="open", arrowtail="none"];
+}

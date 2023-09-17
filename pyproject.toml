@@ -5,6 +5,7 @@ description = ""
 authors = ["Rooki"]
 readme = "README.md"
 
+# This is only used if you want to do a "pip install ." and run it as a CLI app, not w/ running the module call
 [tool.poetry.scripts]
 fediseernotification = "fediseer_alerts.__main__:start"
 

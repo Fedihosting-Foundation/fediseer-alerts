@@ -36,5 +36,5 @@ RUN useradd --create-home appuser
 RUN chown appuser:appuser -R /app/
 USER appuser
 # Run the executable
-ENV PYTHONPATH "${PYTHONPATH}:/fediseernotification"
-CMD [ "python3", "fediseernotification" ]
+ENV PYTHONPATH "${PYTHONPATH}:/fediseer_alerts"
+CMD [ "python3", "fediseer_alerts" ]

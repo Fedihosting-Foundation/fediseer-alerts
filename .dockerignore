@@ -1,8 +1,8 @@
-# Ignore everything
-**
 
-# ... except for dependencies and source
-!pyproject.toml
-!poetry.lock
-!abusemailchecker
-!tests
+docs
+CHANGELOG.md
+docker-compose.yml
+Dockerfile
+README.md
+Taskfile.yaml
+.*
