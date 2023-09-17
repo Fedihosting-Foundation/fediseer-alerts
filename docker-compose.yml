@@ -3,6 +3,6 @@ services:
   abusemailchecker:
     env_file: .env
     restart: always
-    build: ./
-    # image: ghcr.io/lemmyworld/abuse-mail-checker:latest
+    image: ghcr.io/lemmyworld/fediseer-alerts:latest
+#    build: ./
 
