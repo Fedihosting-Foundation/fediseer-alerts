@@ -75,7 +75,7 @@ def start():
 
 
 def get_censures():
-    response = get('https://fediseer.com/api/v1/reports?report_type=CENSURE&page=1')
+    response = get('https://fediseer.com/api/v1/reports?report_type=CENSURE&page=1', timeout=60)
     if response.status_code == 200:
         return response.json()
     else:
