@@ -24,8 +24,8 @@ def start():
 
     if getenv('SLACK_WEBHOOK_URL'):
         webhook = WebhookClient(getenv('SLACK_WEBHOOK_URL'), timeout=60)
-
-    db = MongoClient(getenv('MONGO_URI'))['fediseer-notifications']['censures']
+    print(getenv('MONGO_URI'))
+    db = MongoClient(host=getenv('MONGO_URI'))['fediseer-notifications']['censures']
     logging.info("Starting...")
     while True:
         censures = get_censures()
