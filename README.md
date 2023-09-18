@@ -1,7 +1,6 @@
-# Abuse Mail Checker
+# Fediseer Alerts
 
-This script will check for the given email ( unread, all folders ) for lemmy URLs, comments or posts.  
-It will automatically remove those preemtively and send out a slack(optional) and email notification.  
+This script alert to the slack webhook if there are any new censures.
 
 To configure it rename .env_example to .env and put your wanted variables in it.
 
