@@ -1,8 +1,19 @@
 version: '2'
 services:
+  mongo:
+    image: 'mongo:6.0'
+    ports:
+      - '27027:27017'
+    volumes:
+      - 'mongo:/data/fedidb'
+
   abusemailchecker:
     env_file: .env
     restart: always
     image: ghcr.io/lemmyworld/fediseer-alerts:latest
+    depends_on:
+      - 'mongo'
 #    build: ./
 
+volumes:
+  mongo:
