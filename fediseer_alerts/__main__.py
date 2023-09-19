@@ -64,8 +64,8 @@ def start():
                     if webhook:
                         webhook.send(
                             text=f"From: {censure.source_domain}\n"
-                            f"To: {censure.report_activity.value}\n"
-                            f"Action{censure.target_domain}"
+                            f"To: {censure.target_domain}\n"
+                            f"Action: {censure.report_activity.value}"
                         )
 
         else:
