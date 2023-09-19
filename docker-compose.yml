@@ -10,7 +10,7 @@ services:
   abusemailchecker:
     env_file: .env
     restart: always
-    image: ghcr.io/lemmyworld/fediseer-alerts:latest
+    image: ghcr.io/lemmyworld/fediseer-alerts:main
     depends_on:
       - 'mongo'
 #    build: ./
