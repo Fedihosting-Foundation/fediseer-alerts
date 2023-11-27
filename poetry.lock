@@ -1736,13 +1736,13 @@ files = [
 
 [[package]]
 name = "slack-sdk"
-version = "3.22.0"
+version = "3.26.0"
 description = "The Slack API Platform SDK for Python"
 optional = false
 python-versions = ">=3.6.0"
 files = [
-    {file = "slack_sdk-3.22.0-py2.py3-none-any.whl", hash = "sha256:f102a4902115dff3b97c3e8883ad4e22d54732221886fc5ef29bfc290f063b4a"},
-    {file = "slack_sdk-3.22.0.tar.gz", hash = "sha256:6eacce0fa4f8cfb4d84eac0d7d7e1b1926040a2df654ae86b94179bdf2bc4d8c"},
+    {file = "slack_sdk-3.26.0-py2.py3-none-any.whl", hash = "sha256:b84c2d93163166eb682e290c19334683c2d0f0cb4a5479c809706b44038fdda1"},
+    {file = "slack_sdk-3.26.0.tar.gz", hash = "sha256:147946f388ce73b17c377b823759fcb39c0eca7444ca0a942dc12a3940a4f44f"},
 ]
 
 [package.extras]
