@@ -14,7 +14,7 @@ fediseernotification = "fediseer_alerts.__main__:start"
 python = ">=3.10,<=3.12"
 python-dotenv = "*"
 slack-sdk = "*"
-pymongo = "^4.5.0"
+pymongo = "^4.6.3"
 pythonseer = "^0.2.0"
 
 
